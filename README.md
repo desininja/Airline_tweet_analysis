@@ -2,7 +2,7 @@
 Sentiment analysis of tweets about US Airline
 
 I wanted to use an easy way to deploy code online, so learned about streamlit.
-Here i built a dashboard for Sentiment analysis of tweets about US Ariline.
+Here i built a dashboard for Sentiment analysis of tweets about US Airline.
 Streamlit can be implemented in python. It is very easy to understand, and build new apps, Machine learning models and data science projects.
 
 As this is my first ever streamlit/python code, i am keeping it simple and deploying it online.
