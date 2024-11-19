@@ -76,7 +76,7 @@ if 'latitude' in data.columns:
     st.sidebar.subheader("Geographic Analysis")
     if st.sidebar.checkbox("Show Tweet Locations"):
         st.markdown("### Geographic Analysis of Tweets")
-        st.map(data[['latitude', 'longitude']].dropnaa())
+        st.map(data[['latitude', 'longitude']].dropna())
 
 # Sentiment by airline
 st.sidebar.subheader("Compare Airlines")
