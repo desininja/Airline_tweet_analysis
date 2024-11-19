@@ -65,11 +65,9 @@ ax.axis('off')
 st.pyplot(fig)
 
 # Geographic Analysis
-if 'tweet_coord' in data.columns:
+if 'latitude' in data.columns:
     st.sidebar.subheader("Geographic Analysis")
     if st.sidebar.checkbox("Show Tweet Locations"):
-        data['latitude'] = data['tweet_coord'].apply(lambda x: eval(x)[0] if pd.notnull(x) else None)
-        data['longitude'] = data['tweet_coord'].apply(lambda x: eval(x)[1] if pd.notnull(x) else None)
         st.map(data[['latitude', 'longitude']].dropna())
 
 # Sentiment by airline
@@ -83,9 +81,16 @@ if airlines:
 # Bubble Chart for Sentiments
 st.sidebar.subheader("Advanced Visualizations")
 if st.sidebar.checkbox("Show Bubble Chart"):
-    fig = px.scatter(data, x='tweet_length', y='retweets', size='likes', color='airline_sentiment',
-                     hover_name='text', title="Bubble Chart of Tweets")
+    fig = px.scatter(
+        data, 
+        x='tweet_length', 
+        y='retweet_count',  # Use the correct column name here
+        size='airline_sentiment_confidence',  # Adjust this to a relevant column, if 'likes' doesn't exist
+        hover_name='text', 
+        title="Bubble Chart of Tweets"
+    )
     st.plotly_chart(fig)
+
 
 # Heatmap for tweet frequencies
 if st.sidebar.checkbox("Show Heatmap"):
@@ -99,11 +104,11 @@ if st.sidebar.checkbox("Download Filtered Data"):
     filtered_csv = data.to_csv(index=False)
     st.download_button("Download CSV", filtered_csv, file_name="filtered_tweets.csv", mime="text/csv")
 
-# Sentiment Prediction (Mock Example)
-st.sidebar.subheader("Sentiment Prediction")
-user_tweet = st.text_input("Enter a Tweet to Predict Sentiment:")
-if user_tweet:
-    st.write("Predicted Sentiment: Positive (Mock Prediction)")
+# # Sentiment Prediction (Mock Example)
+# st.sidebar.subheader("Sentiment Prediction")
+# user_tweet = st.text_input("Enter a Tweet to Predict Sentiment:")
+# if user_tweet:
+#     st.write("Predicted Sentiment: Positive (Mock Prediction)")
 
 st.sidebar.markdown("-----")
 st.sidebar.write("Created with ❤️ using Streamlit")
