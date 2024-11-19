@@ -1,4 +1,6 @@
 streamlit
-plotly==4.12.0
-#pip install wordcloud
-WordCloud
+pandas
+numpy
+plotly
+wordcloud
+matplotlib
