@@ -105,5 +105,5 @@ user_tweet = st.text_input("Enter a Tweet to Predict Sentiment:")
 if user_tweet:
     st.write("Predicted Sentiment: Positive (Mock Prediction)")
 
-st.sidebar.markdown("---")
+st.sidebar.markdown("-----")
 st.sidebar.write("Created with ❤️ using Streamlit")
