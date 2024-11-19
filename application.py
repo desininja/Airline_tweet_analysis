@@ -7,12 +7,14 @@ import plotly.graph_objects as go
 from wordcloud import WordCloud, STOPWORDS
 import matplotlib.pyplot as plt
 
+# Title and Sidebar
 st.title("Sentiment Analysis of Tweets about US Airlines")
 st.sidebar.title("Sentiment Analysis of Tweets")
 st.markdown("This application is a Streamlit dashboard used to analyze sentiments of tweets 🐦")
 st.sidebar.markdown("This application is a Streamlit dashboard used to analyze sentiments of tweets 🐦")
 
-@st.cache(persist=True)
+# Load Data
+@st.cache_data(persist=True)
 def load_data():
     data = pd.read_csv('Tweets.csv')
     data['tweet_created'] = pd.to_datetime(data['tweet_created'])
@@ -45,6 +47,8 @@ words = ' '.join(df['text'])
 processed_words = ' '.join([word for word in words.split() if 'http' not in word and not word.startswith('@') and word != 'RT'])
 wordcloud = WordCloud(stopwords=STOPWORDS, background_color='white', width=800, height=640).generate(processed_words)
 
-plt.imshow(wordcloud, interpolation='bilinear')
-plt.axis('off')
-st.pyplot()
+# Create a specific Matplotlib figure
+fig, ax = plt.subplots()
+ax.imshow(wordcloud, interpolation='bilinear')
+ax.axis('off')
+st.pyplot(fig)
